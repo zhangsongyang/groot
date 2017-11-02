@@ -23,19 +23,19 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.POST)
     public PageInfo<Country> getAll(Country country) {
         List<Country> countryList = countryService.getAll(country);
         return new PageInfo<Country>(countryList);
     }
 
-    @RequestMapping(value = "/view/{id}")
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.POST)
     public Country view(@PathVariable Integer id) {
         Country country = countryService.getById(id);
         return country;
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public ModelMap delete(@PathVariable Integer id) {
         ModelMap result = new ModelMap();
         countryService.deleteById(id);

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -24,24 +23,24 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.POST)
     public PageInfo<UserInfo> getAll(UserInfo userInfo) {
         List<UserInfo> userInfoList = userInfoService.getAll(userInfo);
         return new PageInfo<UserInfo>(userInfoList);
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public UserInfo add() {
         return new UserInfo();
     }
 
-    @RequestMapping(value = "/view/{id}")
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.POST)
     public UserInfo view(@PathVariable Integer id) {
         UserInfo userInfo = userInfoService.getById(id);
         return userInfo;
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public ModelMap delete(@PathVariable Integer id) {
         ModelMap result = new ModelMap();
         userInfoService.deleteById(id);

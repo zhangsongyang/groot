@@ -23,19 +23,19 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.POST)
     public PageInfo<City> getAll(City city) {
         List<City> countryList = cityService.getAll(city);
         return new PageInfo<City>(countryList);
     }
 
-    @RequestMapping(value = "/view/{id}")
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.POST)
     public City view(@PathVariable Integer id) {
         City city = cityService.getById(id);
         return city;
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public ModelMap delete(@PathVariable Integer id) {
         ModelMap result = new ModelMap();
         cityService.deleteById(id);
